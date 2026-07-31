@@ -1,3 +1,5 @@
+import joblib
+import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -58,8 +60,16 @@ X_test = vectorizer.transform(X_test)
 model = LogisticRegression(max_iter=1000)
 
 model.fit(X_train, y_train)
+# Create model folder
+import os
+import joblib
 
-# -------------------------------
+os.makedirs("model", exist_ok=True)
+
+joblib.dump(model, "model/model.pkl")
+joblib.dump(vectorizer, "model/vectorizer.pkl")
+
+print("Model and vectorizer saved successfully!")
 # Prediction
 # -------------------------------
 
